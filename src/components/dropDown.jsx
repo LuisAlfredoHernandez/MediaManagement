@@ -1,19 +1,22 @@
-import { FormControl, TextField, Select, MenuItem } from "@mui/material";
+import { Select, MenuItem } from "@mui/material";
 
 
-const DropDown = () => {
-    return(
-    <Select
-        sx={{
-            marginTop: 35,
-            width: 150,
-            height: 50,
-        }}
-    >
-        <MenuItem value={1}>Nombre</MenuItem>
-        <MenuItem value={2}>Usuario</MenuItem>
-        <MenuItem value={3}>Tipo</MenuItem>
-    </Select>
-)}
+const DropDown = ({ width, height, arr }) => {
+    return (
+        <Select
+            defaultValue={1}
+            sx={{
+                width: width,
+                height: height,
+            }}
+        >
+            {
+                arr.map((element, index) => {
+                    return <MenuItem key={index} value={index + 1}>{element}</MenuItem>
+                })
+            }
+        </Select>
+    )
+}
 
 export default DropDown;

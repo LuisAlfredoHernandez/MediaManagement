@@ -3,7 +3,7 @@ import InfoIcon from '@mui/icons-material/Info';
 
 const ImagesGrid = ({ itemData }) => {
     return (
-        <ImageList sx={{ width: 1000, height: 450 }} cols={3} >
+        <ImageList sx={{ width: 1000, height: 400 }} cols={3} >
             {itemData.map((item) => (
                 <ImageListItem key={item.id} cols={1}>
                     <img
