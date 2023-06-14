@@ -15,9 +15,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (true) {
       imagesCall()
-    }
   }, [])
 
 

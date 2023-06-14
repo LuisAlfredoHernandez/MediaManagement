@@ -1,4 +1,4 @@
-import { ImageList, ListSubheader, ImageListItemBar, IconButton, ImageListItem } from '@mui/material';
+import { ImageList, ImageListItemBar, IconButton, ImageListItem } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 
 const ImagesGrid = ({ itemData }) => {
