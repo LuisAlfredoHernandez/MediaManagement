@@ -1,27 +1,26 @@
 import axios from "axios";
 
 
-const deleteUser = (nombre) => {
-    axios.delete(`https://mmrestfullapi-production.up.railway.app/api/user`, {
-        headers: {
-            'content-type': 'text/json'
-        },
-        data: {
-            nombre
-        }
-    });
+const deleteUser = async(nombre) => {
+    try {
+        const response = await axios.delete(`https://mmrestfullapi-production.up.railway.app/api/user`, nombre);
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-const addUser = (nombre) => {
-    axios.post(`https://mmrestfullapi-production.up.railway.app/api/user`, {
-        headers: {
-            'content-type': 'text/json'
-        },
-        data: {
-            nombre
-        }
-    });
+const addUser = async (nombre) => {
+    try {
+        const response = await axios.post(`https://mmrestfullapi-production.up.railway.app/api/user`, nombre);
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+    }
 }
+
+
+
 
 
 

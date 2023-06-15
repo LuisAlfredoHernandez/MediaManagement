@@ -21,7 +21,6 @@ function App() {
   return (
     <>
       <Homepage data={data} imagesServiceCall={imagesServiceCall} />
-      {console.log(data)}
     </>
   )
 }
