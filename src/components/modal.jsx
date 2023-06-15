@@ -1,8 +1,38 @@
 import { TextField, Modal, Typography, Box, Stack, Button } from '@mui/material';
+import { useState } from 'react';
+import { addUser, deleteUser } from '../../services/users';
 
 
 const ModalView = ({ open, setOpen, isDeleteUser }) => {
-    const handleClose = () => setOpen(false);
+    const [nombre, setNombre] = useState('')
+    const [description, setDescripcion] = useState('')
+
+    const handleClose = () => {
+        setOpen(false);
+        setNombre('')
+        setDescripcion('')
+    }
+
+    const onChangeInputhandler = ({ target }) => {
+        if (target.id == 'deletionReason')
+            setDescripcion(target.value)
+        else
+            setNombre(target.value)
+    }
+
+    const makeServiceCall = () => {
+        if (isDeleteUser) {
+            if (!description || !nombre)
+                alert('Hay campos faltantes para continuar con el proceso!')
+            else
+                deleteUser(nombre)
+        } else {
+            if (!nombre)
+                alert('Hay campos faltantes para continuar con el proceso!')
+            else
+                addUser(nombre)
+        }
+    }
 
     const style = {
         position: 'absolute',
@@ -25,15 +55,16 @@ const ModalView = ({ open, setOpen, isDeleteUser }) => {
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                      {isDeleteUser ? "Eliminar Usuario" : "Registrar Usuario"}
+                        {isDeleteUser ? "Eliminar Usuario" : "Registrar Usuario"}
                     </Typography>
                     <Stack>
-                        <TextField id="standard-basic2" label="Nombre del usuario" variant="standard" />
-                        {isDeleteUser && <TextField id="standard-basic3" label="Razon de eliminar usuario" variant="standard" />}
+                        <TextField id="username" label="Nombre del usuario" variant="standard" onChange={onChangeInputhandler} value={nombre} />
+                        {isDeleteUser && <TextField id="deletionReason" label="Razon de eliminar usuario" variant="standard" onChange={onChangeInputhandler} value={description} />}
                     </Stack>
                     <Stack spacing={2} direction="row" justifyContent={"center"} marginTop={3}>
                         <Button variant="contained" color='error' onClick={handleClose}>Cancelar</Button>
-                        <Button variant="contained">Confirmar</Button>
+                        {isDeleteUser ? <Button variant="contained" onClick={makeServiceCall}>Eliminar</Button>
+                            : <Button variant="contained" onClick={makeServiceCall}>Agregar</Button>}
                     </Stack>
                 </Box>
             </Modal>
