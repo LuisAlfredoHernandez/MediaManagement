@@ -1,10 +1,15 @@
 import { Select, MenuItem } from "@mui/material";
 
 
-const DropDown = ({ width, height, arr }) => {
+const DropDown = ({ width, height, arr, imagesServiceCall }) => {
+    const handleChange = ({target}) => {
+        imagesServiceCall(target.value)
+    }
+
     return (
         <Select
-            defaultValue={1}
+            defaultValue={arr[0]}
+            onChange={handleChange}
             sx={{
                 width: width,
                 height: height,
@@ -12,7 +17,7 @@ const DropDown = ({ width, height, arr }) => {
         >
             {
                 arr.map((element, index) => {
-                    return <MenuItem key={index} value={index + 1}>{element}</MenuItem>
+                    return <MenuItem key={index} value={element}>{element}</MenuItem>
                 })
             }
         </Select>
