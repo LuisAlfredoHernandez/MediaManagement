@@ -24,13 +24,18 @@ const ModalView = ({ open, setOpen, isDeleteUser }) => {
         if (isDeleteUser) {
             if (!description || !nombre)
                 alert('Hay campos faltantes para continuar con el proceso!')
-            else
+            else {
                 deleteUser(nombre)
+                handleClose()
+            }
         } else {
             if (!nombre)
                 alert('Hay campos faltantes para continuar con el proceso!')
-            else
+            else {
                 addUser(nombre)
+                handleClose()
+            }
+
         }
     }
 
