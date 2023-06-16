@@ -26,7 +26,7 @@ function App() {
       {route === "homePage" && <Homepage data={data} setData={setData} setRoute={setRoute}
         setDeleteImage={setDeleteImage}
       />}
-      {route === "formPage" && <FormPage setRoute={setRoute} isDeleteImage={deleteImage} />}
+      {route === "formPage" && <FormPage setData={setData} setRoute={setRoute} isDeleteImage={deleteImage} />}
     </>
   )
 }

@@ -1,9 +1,9 @@
 import { TextField, Typography, Box, Stack, Button } from '@mui/material';
 import { useState } from 'react';
-import { addImage, deleteImage } from '../../services/images';
+import { addImage, deleteImage, getResources } from '../../services/images';
 
 
-const FormPage = ({ isDeleteImage, setRoute }) => {
+const FormPage = ({ isDeleteImage, setRoute, setData }) => {
     const [nombreImagen, setNombreImagen] = useState('')
     const [descriptionImage, setDescripcionImagen] = useState('')
     const [username, setUsername] = useState('')
@@ -33,6 +33,12 @@ const FormPage = ({ isDeleteImage, setRoute }) => {
                 deleteImage(nombreImagen)
         }
         handleClose()
+        callImagesService();
+    }
+
+    const callImagesService = async () => {
+        const { data } = await getResources()
+        setData(data.resources)
     }
 
     const onChangeInputhandler = ({ target }) => {
