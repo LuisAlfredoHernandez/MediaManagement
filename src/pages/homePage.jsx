@@ -29,10 +29,11 @@ const Homepage = ({ data, setData }) => {
         handleOpen()
     }
 
-    const onInputChange = ({ target }) => {
+    const onInputChange = async ({ target }) => {
         const imageInputValue = target.value
         setinputImageText(imageInputValue)
-        getResourcesByDropDown(imageInputValue, dropDownValue)
+        const { data } = await getResourcesByDropDown(dropDownValue.toLocaleLowerCase(), imageInputValue)
+        setData(data.resources)
     }
 
 

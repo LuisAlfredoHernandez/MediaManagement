@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { useEffect } from 'react'
 import Homepage from './pages/homePage';
-import { getResources } from '../services/images';
+import { getResources, getResourcesByDropDown } from '../services/images';
 
 
 function App() {

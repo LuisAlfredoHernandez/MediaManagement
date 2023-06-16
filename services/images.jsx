@@ -17,18 +17,14 @@ const getResources = async (desde = 1, limite = 10) => {
 }
 
 
-const getResourcesByDropDown = async (inputValue, DropDownValue) => {
+const getResourcesByDropDown = async (dropDownValue, inputValue) => {
   try {
-    const response = await axios.get(`http://localhost:8080/api/resource`, {
-      params: {
-        DropDownValue,
-        inputValue
-      }
-    })
-    if (response.status === 200)
-      console.log(response)
+    const response = await axios.get(`https://mmrestfullapi-production.up.railway.app/api/resource/${dropDownValue}/${inputValue}`)
+    if (response.status === 200 && response.data.resources.length)
+        return response
   } catch (error) {
     console.log(error)
+    return error
   }
 }
 

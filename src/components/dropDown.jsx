@@ -13,9 +13,9 @@ const DropDown = ({ width, height, arr, setDropDownValue, setdropDownPaginationV
     }
 
     const setRoadByParamCall = (dropDownValue) => {
-        setDropDownValue(dropDownValue)
+        setDropDownValue(dropDownValue.toLowerCase())
         if (inputImageText)
-            getResourcesByDropDown(inputImageText, dropDownValue)
+            getResourcesByDropDown(dropDownValue, inputImageText)
     }
 
     const setRoadGetResourcesCall = async (dropDownValue) => {
