@@ -14,13 +14,13 @@ const ImagesGrid = ({ itemData }) => {
                 
                     />
                     <ImageListItemBar
-                        title={item.tipo}
+                        title={item.nombreImagen}
                         key={item._id}
                         subtitle={item.descripcion}
                         actionIcon={
                             <IconButton
                                 sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                                aria-label={`info about ${item.tipo}`}
+                                aria-label={`info about ${item.nombreImagen}`}
                             >
                                 <InfoIcon />
                             </IconButton>

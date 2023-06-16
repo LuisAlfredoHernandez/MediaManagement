@@ -3,7 +3,7 @@ import axios from "axios";
 
 const deleteUser = async (nombre) => {
     try {
-        const response = await axios.delete(`http://localhost:8080/api/user/${nombre}`);
+        const response = await axios.delete(`https://mmrestfullapi-production.up.railway.app/api/user/${nombre}`);
         if (response.status === 200)
             alert('El usuario fue eliminado exitosamente!')
     } catch (error) {
@@ -16,7 +16,7 @@ const deleteUser = async (nombre) => {
 
 const addUser = async (nombre) => {
     try {
-        const response = await axios.post(`http://localhost:8080/api/user`, { nombre });
+        const response = await axios.post(`https://mmrestfullapi-production.up.railway.app/api/user/`, { nombre });
         if (response.status === 201)
             alert('El usuario fue creado exitosamente!')
     } catch (error) {
