@@ -2,7 +2,7 @@ import { Select, MenuItem } from "@mui/material";
 import { getResources, getResourcesByDropDown } from "../../services/images";
 
 
-const DropDown = ({ width, height, arr, setDropDownValue, setdropDownPaginationValue, inputImageText, paginationValue, setData }) => {
+const DropDown = ({ width, height, arr, setDropDownValue, setdropDownPaginationValue, inputImageText, paginationValue, setData, setinputImageText }) => {
 
     const handleChange = ({ target }) => {
         const dropDownValue = target.value
@@ -14,12 +14,14 @@ const DropDown = ({ width, height, arr, setDropDownValue, setdropDownPaginationV
 
     const setRoadByParamCall = (dropDownValue) => {
         setDropDownValue(dropDownValue.toLowerCase())
+        setinputImageText('')
         if (inputImageText)
             getResourcesByDropDown(dropDownValue, inputImageText)
     }
 
     const setRoadGetResourcesCall = async (dropDownValue) => {
         setdropDownPaginationValue(dropDownValue)
+        setinputImageText('')
         const { data } = await getResources(paginationValue, dropDownValue)
         setData(data.resources)
     }

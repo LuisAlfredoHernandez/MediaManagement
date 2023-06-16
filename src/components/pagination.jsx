@@ -4,10 +4,11 @@ import { getResources } from '../../services/images';
 import { calculatePagination } from '../helpers';
 
 
-const PaginationRounded = ({ setPaginationValue, dropDownPaginationValue, setData }) => {
+const PaginationRounded = ({ setPaginationValue, dropDownPaginationValue, setData, setinputImageText }) => {
 
     const handleChange = async (event, value) => {
         const pagination = value
+        setinputImageText('')
         setPaginationValue(pagination)
         const paginationValue = calculatePagination(pagination)
         const { data } = await getResources(paginationValue, dropDownPaginationValue)

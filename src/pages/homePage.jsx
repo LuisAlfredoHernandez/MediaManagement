@@ -45,9 +45,9 @@ const Homepage = ({ data, setData }) => {
                     <Button variant="contained" color='error' onClick={handleDeleteUser}>Eliminar Usuario</Button>
                 </Stack>
                 <Stack spacing={4} direction="row" marginTop={5} justifyContent={"center"}>
-                    <TextField id="standard-basic" label="Buscar imagen por..." variant="standard" onChange={onInputChange} />
+                    <TextField id="standard-basic" label="Buscar imagen por..." variant="standard" onChange={onInputChange} value={inputImageText} />
                     <DropDown width={150} height={50} arr={searchImageByArr} setDropDownValue={setDropDownValue}
-                        inputImageText={inputImageText}
+                        inputImageText={inputImageText} setinputImageText={setinputImageText}
                     />
                 </Stack>
                 <Stack direction="row" >
@@ -55,10 +55,10 @@ const Homepage = ({ data, setData }) => {
                 </Stack>
                 <Stack direction="row" m={5} spacing={4} justifyContent={"center"}>
                     <PaginationRounded setPaginationValue={setPaginationValue} dropDownPaginationValue={dropDownPaginationValue}
-                        setData={setData}
+                        setData={setData} setinputImageText = {setinputImageText}
                     />
                     <DropDown width={75} height={50} arr={imageLimitValuesArr} paginationValue={paginationValue}
-                        setdropDownPaginationValue={setdropDownPaginationValue} setData={setData}
+                        setdropDownPaginationValue={setdropDownPaginationValue} setData={setData} setinputImageText={setinputImageText}
                     />
                 </Stack>
                 <ModalView open={open} setOpen={setOpen} isDeleteUser={deleteUser} />
