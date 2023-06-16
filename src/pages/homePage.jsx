@@ -4,25 +4,37 @@ import DropDown from '../components/dropDown';
 import ModalView from '../components/modal'
 import { TextField, Stack, Box, Button } from '@mui/material';
 import { useState } from 'react'
+import { getResourcesByDropDown } from '../../services/images';
 
 
-const Homepage = ({ data, imagesServiceCall }) => {
+const Homepage = ({ data, setData }) => {
     const searchImageByArr = ['Nombre', 'Usuario', 'Tipo']
     const imageLimitValuesArr = [10, 20, 50, 100]
     const [open, setOpen] = useState(false);
     const [deleteUser, setDeleteUser] = useState(false);
+    const [dropDownValue, setDropDownValue] = useState(searchImageByArr[0])
+    const [dropDownPaginationValue, setdropDownPaginationValue] = useState(imageLimitValuesArr[0])
+    const [inputImageText, setinputImageText] = useState('')
+    const [paginationValue, setPaginationValue] = useState(1)
 
-    const handleOpen = () => setOpen(true);
+    const handleOpen = () => setOpen(true)
 
     const handleAddUser = () => {
         setDeleteUser(false)
         handleOpen()
-    };
+    }
 
     const handleDeleteUser = () => {
         setDeleteUser(true)
-        handleOpen();
+        handleOpen()
     }
+
+    const onInputChange = ({ target }) => {
+        const imageInputValue = target.value
+        setinputImageText(imageInputValue)
+        getResourcesByDropDown(imageInputValue, dropDownValue)
+    }
+
 
     return (
         <>
@@ -32,17 +44,23 @@ const Homepage = ({ data, imagesServiceCall }) => {
                     <Button variant="contained" color='error' onClick={handleDeleteUser}>Eliminar Usuario</Button>
                 </Stack>
                 <Stack spacing={4} direction="row" marginTop={5} justifyContent={"center"}>
-                    <TextField id="standard-basic" label="Buscar imagen por..." variant="standard" />
-                    <DropDown width={150} height={50} arr={searchImageByArr}/>
+                    <TextField id="standard-basic" label="Buscar imagen por..." variant="standard" onChange={onInputChange} />
+                    <DropDown width={150} height={50} arr={searchImageByArr} setDropDownValue={setDropDownValue}
+                        inputImageText={inputImageText}
+                    />
                 </Stack>
                 <Stack direction="row" >
                     <ImagesGrid itemData={data} />
                 </Stack>
                 <Stack direction="row" m={5} spacing={4} justifyContent={"center"}>
-                    <PaginationRounded />
-                    <DropDown width={75} height={50} arr={imageLimitValuesArr} imagesServiceCall={imagesServiceCall} />
+                    <PaginationRounded setPaginationValue={setPaginationValue} dropDownPaginationValue={dropDownPaginationValue}
+                        setData={setData}
+                    />
+                    <DropDown width={75} height={50} arr={imageLimitValuesArr} paginationValue={paginationValue}
+                        setdropDownPaginationValue={setdropDownPaginationValue} setData={setData}
+                    />
                 </Stack>
-                <ModalView open={open} setOpen={setOpen} isDeleteUser={deleteUser}/>
+                <ModalView open={open} setOpen={setOpen} isDeleteUser={deleteUser} />
             </Box>
         </>
     );
