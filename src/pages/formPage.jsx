@@ -22,7 +22,7 @@ const FormPage = ({ isDeleteImage, setRoute, setData }) => {
 
     const makeServiceCall = () => {
         if (!isDeleteImage) {
-            if (!descriptionImage || !nombreImagen || username || url || tipo)
+            if (!descriptionImage || !nombreImagen || !username || !url || !tipo)
                 alert('Hay campos faltantes para continuar con el proceso!')
             else
                 addImage(descriptionImage, nombreImagen, username, url, tipo)
