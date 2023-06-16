@@ -5,27 +5,27 @@ import { addImage, deleteImage, getResources } from '../../services/images';
 
 const FormPage = ({ isDeleteImage, setRoute, setData }) => {
     const [nombreImagen, setNombreImagen] = useState('')
-    const [descriptionImage, setDescripcionImagen] = useState('')
-    const [username, setUsername] = useState('')
-    const [url, setUrl] = useState('')
+    const [descripcion, setDescripcion] = useState('')
+    const [nombre, setNombre] = useState('')
+    const [src, setSrc] = useState('')
     const [tipo, setTipo] = useState('')
 
 
     const handleClose = () => {
         setRoute('homePage')
         setNombreImagen('')
-        setDescripcionImagen('')
-        setUsername('')
-        setUrl('')
+        setDescripcion('')
+        setNombre('')
+        setSrc('')
         setTipo('')
     }
 
     const makeServiceCall = () => {
         if (!isDeleteImage) {
-            if (!descriptionImage || !nombreImagen || !username || !url || !tipo)
+            if (!descripcion || !nombreImagen || !nombre || !src || !tipo)
                 alert('Hay campos faltantes para continuar con el proceso!')
             else
-                addImage(descriptionImage, nombreImagen, username, url, tipo)
+                addImage(descripcion, nombreImagen, nombre, src, tipo)
         } else {
             if (!nombreImagen)
                 alert('Hay campos faltantes para continuar con el proceso!')
@@ -45,11 +45,11 @@ const FormPage = ({ isDeleteImage, setRoute, setData }) => {
         if (target.id == 'nombreImagen')
             setNombreImagen(target.value)
         else if (target.id == 'username')
-            setUsername(target.value)
+            setNombre(target.value)
         else if (target.id == 'descriptionImage')
-            setDescripcionImagen(target.value)
+            setDescripcion(target.value)
         else if (target.id == 'url')
-            setUrl(target.value)
+            setSrc(target.value)
         else if (target.id == 'imageType')
             setTipo(target.value)
     }
@@ -77,16 +77,16 @@ const FormPage = ({ isDeleteImage, setRoute, setData }) => {
                         onChange={onChangeInputhandler} value={nombreImagen} />
 
                     {!isDeleteImage && <TextField id="descriptionImage" label="Descripcion"
-                        variant="standard" onChange={onChangeInputhandler} value={descriptionImage} />
+                        variant="standard" onChange={onChangeInputhandler} value={descripcion} />
                     }
                     {!isDeleteImage && <TextField id="imageType" label="Tipo"
                         variant="standard" onChange={onChangeInputhandler} value={tipo} />
                     }
                     {!isDeleteImage && <TextField id="username" label="Nombre de usuario"
-                        variant="standard" onChange={onChangeInputhandler} value={username} />
+                        variant="standard" onChange={onChangeInputhandler} value={nombre} />
                     }
                     {!isDeleteImage && <TextField id="url" label="URL"
-                        variant="standard" onChange={onChangeInputhandler} value={url} />
+                        variant="standard" onChange={onChangeInputhandler} value={src} />
                     }
 
                 </Stack>

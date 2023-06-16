@@ -29,10 +29,10 @@ const getResourcesByDropDown = async (dropDownValue, inputValue) => {
 }
 
 
-const addImage = async (descriptionImage, nombreImagen, username, url, tipo) => {
+const addImage = async (descripcion, nombreImagen, nombre, src, tipo) => {
   try {
-    const response = await axios.post(`https://mmrestfullapi-production.up.railway.app/api/resource/`,
-      { descriptionImage, nombreImagen, username, url, tipo });
+    const response = await axios.post(`https://mmrestfullapi-production.up.railway.app/api/resource`,{ 
+      descripcion, nombreImagen, nombre, src, tipo });
     if (response.status === 201)
       alert('La imagen fue guardada exitosamente!')
       return response
