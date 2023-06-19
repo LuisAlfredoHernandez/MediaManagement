@@ -22,6 +22,8 @@ const getResourcesByDropDown = async (dropDownValue, inputValue) => {
     const response = await axios.get(`https://mmrestfullapi-production.up.railway.app/api/resource/${dropDownValue}/${inputValue}`)
     if (response.status === 200 && response.data.resources.length)
       return response
+      else if(response.status === 404)
+      alert("No se encontro la imagen!")
   } catch (error) {
     console.log(error)
     return error

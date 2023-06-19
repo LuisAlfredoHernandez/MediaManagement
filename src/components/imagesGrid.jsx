@@ -1,7 +1,8 @@
 import { ImageList, ImageListItemBar, IconButton, ImageListItem } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 
-const ImagesGrid = ({ itemData }) => {
+
+const ImagesGrid = ({ itemData }) => {    
     return (
         <ImageList sx={{ width: 1000, height: 400 }} cols={3} >
             {itemData.map((item) => (
@@ -11,7 +12,6 @@ const ImagesGrid = ({ itemData }) => {
                         srcSet={`${item.nombreImagen}?w=248&fit=crop&auto=format&dpr=2 2x`}
                         alt={item.tipo}
                         loading="lazy"
-                
                     />
                     <ImageListItemBar
                         title={item.nombreImagen}

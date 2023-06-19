@@ -38,7 +38,8 @@ const FormPage = ({ isDeleteImage, setRoute, setData }) => {
 
     const callImagesService = async () => {
         const { data } = await getResources()
-        setData(data.resources)
+        const newData = [...data.resources]
+        setData(newData)
     }
 
     const onChangeInputhandler = ({ target }) => {

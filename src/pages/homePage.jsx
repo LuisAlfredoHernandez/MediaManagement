@@ -33,8 +33,12 @@ const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
     const onInputChange = async ({ target }) => {
         const imageInputValue = target.value
         setinputImageText(imageInputValue)
-        const { data } = await getResourcesByDropDown(dropDownValue.toLocaleLowerCase(), imageInputValue)
-        setData(data.resources)
+        if (dropDownValue === "Nombre") setDropDownValue("nombreImagen")
+        const { data } = await getResourcesByDropDown(dropDownValue, imageInputValue)
+        if (data) {
+            const newData = [...data.resources]
+            setData(newData)
+        }
     }
 
     const handleDeleteImage = () => {
