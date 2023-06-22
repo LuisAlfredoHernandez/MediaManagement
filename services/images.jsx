@@ -41,8 +41,6 @@ const addImage = async (descripcion, nombreImagen, nombre, src, tipo) => {
 const deleteImage = async (nombre) => {
   try {
     const response = await axios.delete(`https://mmrestfullapi-production.up.railway.app/api/resource/${nombre}`);
-    if (response.status === 200)
-      alert('El recurso fue eliminado exitosamente!')
     return response
   } catch (error) {
     return error
