@@ -23,7 +23,7 @@ const FormPage = ({ isDeleteImage, setRoute, setData, data }) => {
     const identifyActionType = () => {
         if (!isDeleteImage) {
             addImageImageFlow()
-        } else 
+        } else
             deleteImageFlow()
         handleClose()
     }
@@ -33,7 +33,9 @@ const FormPage = ({ isDeleteImage, setRoute, setData, data }) => {
             alert('Hay campos faltantes para continuar con el proceso!')
         else {
             const newResource = await addImage(descripcion, nombreImagen, nombre, src, tipo)
-            data.concat(newResource)
+            console.log(newResource.data)
+            data.push(newResource.data)
+            console.log()
             data = [...data]
             setData(data)
         }
@@ -43,9 +45,11 @@ const FormPage = ({ isDeleteImage, setRoute, setData, data }) => {
         if (!nombreImagen)
             alert('Hay campos faltantes para continuar con el proceso!')
         else {
-            const retainedDate = await deleteImage(nombreImagen)
-            let newData = data.filter(val => val._id != retainedDate._id)
+            const response = await deleteImage(nombreImagen)
+            const recursoEliminado = response.data.recursoEliminado;
+            let newData = data.filter(val => val._id != recursoEliminado._id)
             newData = [...newData]
+            console.log(newData, recursoEliminado)
             setData(newData)
         }
     }
