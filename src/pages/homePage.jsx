@@ -4,7 +4,7 @@ import DropDown from '../components/dropDown';
 import ModalView from '../components/modal'
 import { TextField, Stack, Box, Button } from '@mui/material';
 import { useState } from 'react'
-import { getResourcesByDropDown } from '../../services/images';
+import { getResourcesByDropDown, getResources } from '../../services/images';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
@@ -39,6 +39,12 @@ const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
             const newData = [...data.resources]
             setData(newData)
         }
+        if(imageInputValue.length < 1){
+            const { data } = await getResources()
+            const newData = [...data.resources]
+            setData(newData)
+        }
+         
     }
 
     const handleDeleteImage = () => {
@@ -68,8 +74,10 @@ const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
                     <TextField id="standard-basic" label="Buscar imagen por..." variant="standard"
                         onChange={onInputChange} value={inputImageText}
                     />
-                    <DropDown width={150} height={50} arr={searchImageByArr} setinputImageText={setinputImageText}
+                    <DropDown width={150} height={50} arr={searchImageByArr}
+                        setinputImageText={setinputImageText}
                         setDropDownValue={setDropDownValue} inputImageText={inputImageText}
+                        dropDownValue = {dropDownValue}
                     />
                 </Stack>
                 <Stack direction="row" >
@@ -84,6 +92,7 @@ const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
                         paginationValue={paginationValue}
                         setdropDownPaginationValue={setdropDownPaginationValue}
                         setData={setData} setinputImageText={setinputImageText}
+                        dropDownValue = {dropDownPaginationValue}
                     />
                 </Stack>
                 <ModalView open={open} setOpen={setOpen} isDeleteUser={deleteUser} />
