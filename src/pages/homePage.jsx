@@ -92,11 +92,12 @@ const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
                      </Stack>
                 <Stack direction="row" m={5} spacing={4} justifyContent={"center"}>
                     <PaginationRounded setPaginationValue={setPaginationValue}
+                        paginationValue={paginationValue} 
                         dropDownPaginationValue={dropDownPaginationValue}
                         setData={setData} setinputImageText={setinputImageText}
                     />
                     <DropDown width={75} height={50} arr={imageLimitValuesArr}
-                        paginationValue={paginationValue}
+                        paginationValue={paginationValue} 
                         setdropDownPaginationValue={setdropDownPaginationValue}
                         setData={setData} setinputImageText={setinputImageText}
                     />

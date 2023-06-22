@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-const getResources = async (desde = 1, limite = 10) => {
+const getResources = async (desde = 0, limite = 10) => {
   try {
     const response = await axios.get(`https://mmrestfullapi-production.up.railway.app/api/resource`, {
       params: {

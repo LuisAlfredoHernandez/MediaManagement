@@ -4,7 +4,7 @@ import { getResources } from '../../services/images';
 import { calculatePagination } from '../helpers';
 
 
-const PaginationRounded = ({ setPaginationValue, dropDownPaginationValue, setData, setinputImageText }) => {
+const PaginationRounded = ({ setPaginationValue, paginationValue ,dropDownPaginationValue, setData, setinputImageText }) => {
 
     const handleChange = async (event, value) => {
         const pagination = value
@@ -18,7 +18,7 @@ const PaginationRounded = ({ setPaginationValue, dropDownPaginationValue, setDat
 
     return (
         <Stack spacing={2} justifyContent={"center"}>
-            <Pagination count={10} shape="rounded" onChange={handleChange} />
+            <Pagination count={10} page={paginationValue} shape="rounded" onChange={handleChange} />
         </Stack>
     );
 }
