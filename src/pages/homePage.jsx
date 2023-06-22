@@ -6,6 +6,7 @@ import { TextField, Stack, Box, Button } from '@mui/material';
 import { useState } from 'react'
 import { getResourcesByDropDown, getResources } from '../../services/images';
 import DeleteIcon from '@mui/icons-material/Delete';
+import NotFound from '../components/notFound';
 
 
 const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
@@ -33,18 +34,26 @@ const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
     const onInputChange = async ({ target }) => {
         const imageInputValue = target.value
         setinputImageText(imageInputValue)
-        if (dropDownValue === "Nombre") setDropDownValue("nombreImagen")
-        const { data } = await getResourcesByDropDown(dropDownValue, imageInputValue)
-        if (data) {
-            const newData = [...data.resources]
+        if (imageInputValue.length > 0) {
+            if (dropDownValue === "Nombre") setDropDownValue("nombreImagen")
+            const response = await getResourcesByDropDown(dropDownValue, imageInputValue)
+            handleServiceResponse(response)
+        }
+        if (imageInputValue.length < 1) {
+            const response = await getResources()
+            handleServiceResponse(response)
+        }
+    }
+
+
+    const handleServiceResponse = (res) => {
+        console.log(res)
+        if (res.data.total === 0)
+            setData([])
+        else if (res?.data?.resources) {
+            const newData = [...res.data.resources]
             setData(newData)
         }
-        if(imageInputValue.length < 1){
-            const { data } = await getResources()
-            const newData = [...data.resources]
-            setData(newData)
-        }
-         
     }
 
     const handleDeleteImage = () => {
@@ -79,8 +88,8 @@ const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
                     />
                 </Stack>
                 <Stack direction="row" >
-                    <ImagesGrid itemData={data} />
-                </Stack>
+                    { data.length > 0 ? <ImagesGrid itemData={data} /> : <NotFound/>}
+                     </Stack>
                 <Stack direction="row" m={5} spacing={4} justifyContent={"center"}>
                     <PaginationRounded setPaginationValue={setPaginationValue}
                         dropDownPaginationValue={dropDownPaginationValue}

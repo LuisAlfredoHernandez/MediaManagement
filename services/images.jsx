@@ -9,10 +9,9 @@ const getResources = async (desde = 1, limite = 10) => {
         limite
       }
     })
-    if (response.status === 200)
-      return response
+    return response
   } catch (error) {
-    console.log(error)
+    return error
   }
 }
 
@@ -20,12 +19,8 @@ const getResources = async (desde = 1, limite = 10) => {
 const getResourcesByDropDown = async (dropDownValue, inputValue) => {
   try {
     const response = await axios.get(`https://mmrestfullapi-production.up.railway.app/api/resource/${dropDownValue}/${inputValue}`)
-    if (response.status === 200 && response.data.resources.length)
-      return response
-      else if(response.status === 404)
-      alert("No se encontro la imagen!")
+    return response
   } catch (error) {
-    console.log(error)
     return error
   }
 }
@@ -33,16 +28,12 @@ const getResourcesByDropDown = async (dropDownValue, inputValue) => {
 
 const addImage = async (descripcion, nombreImagen, nombre, src, tipo) => {
   try {
-    const response = await axios.post(`https://mmrestfullapi-production.up.railway.app/api/resource`,{ 
-      descripcion, nombreImagen, nombre, src, tipo });
-    if (response.status === 201)
-      alert('La imagen fue guardada exitosamente!')
-      return response
+    const response = await axios.post(`https://mmrestfullapi-production.up.railway.app/api/resource`, {
+      descripcion, nombreImagen, nombre, src, tipo
+    });
+    return response
   } catch (error) {
-    if (error.response.status === 400) {
-      alert(`Hubo un problema guardando la imagen, intente mas tade`)
-    }
-    console.log(error);
+    return error
   }
 }
 
@@ -52,12 +43,9 @@ const deleteImage = async (nombre) => {
     const response = await axios.delete(`https://mmrestfullapi-production.up.railway.app/api/resource/${nombre}`);
     if (response.status === 200)
       alert('El recurso fue eliminado exitosamente!')
-      return response
+    return response
   } catch (error) {
-    if (error.response.status === 404) {
-      alert(`El recurso "${nombre}" no se encuentra registrado`)
-    }
-    console.log(error);
+    return error
   }
 }
 
