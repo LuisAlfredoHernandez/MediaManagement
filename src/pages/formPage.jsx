@@ -35,9 +35,7 @@ const FormPage = ({ isDeleteImage, setRoute, setData, data }) => {
             const newResource = await addImage(descripcion, nombreImagen, nombre, src, tipo)
             if (newResource.data) {
                 alert("El recurso fue agregado exitosamente!")
-                data.push(newResource.data)
-                data = [...data]
-                setData(data)
+                setData([...data, newResource])
             }
         }
     }
@@ -51,9 +49,7 @@ const FormPage = ({ isDeleteImage, setRoute, setData, data }) => {
             if (recursoEliminado) {
                 alert('El recurso fue eliminado exitosamente!')
                 let newData = data.filter(val => val._id != recursoEliminado._id)
-                newData = [...newData]
-                console.log(newData, recursoEliminado)
-                setData(newData)
+                setData([...newData])
             }
         }
     }
