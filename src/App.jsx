@@ -1,12 +1,10 @@
-import { useState } from 'react'
-import './App.css'
-import { useEffect } from 'react'
-import Homepage from './pages/homePage';
+import { useEffect, useState } from 'react'
 import { getResources } from '../services/images';
-import FormPage from './pages/formPage';
+import { FormPage, Homepage } from './pages';
+import './App.css'
 
 
-function App() {
+export const App = () => {
   const [data, setData] = useState([])
   const [route, setRoute] = useState('homePage')
   const [deleteImage, setDeleteImage] = useState(false)
@@ -20,7 +18,6 @@ function App() {
     imagesServiceCall()
   }, [])
 
-
   return (
     <>
       {route === "homePage" && <Homepage data={data} setData={setData} setRoute={setRoute}
@@ -30,5 +27,3 @@ function App() {
     </>
   )
 }
-
-export default App

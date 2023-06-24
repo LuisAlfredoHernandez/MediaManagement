@@ -2,7 +2,7 @@ import { ImageList, ImageListItemBar, IconButton, ImageListItem } from '@mui/mat
 import InfoIcon from '@mui/icons-material/Info';
 
 
-const ImagesGrid = ({ itemData }) => {    
+export const ImagesGrid = ({ itemData }) => {    
     return (
         <ImageList sx={{ width: 1000, height: 400 }} cols={3} >
             {itemData.map((item) => (
@@ -31,5 +31,3 @@ const ImagesGrid = ({ itemData }) => {
         </ImageList>
     );
 }
-
-export default ImagesGrid;

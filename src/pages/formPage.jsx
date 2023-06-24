@@ -1,9 +1,9 @@
-import { TextField, Typography, Box, Stack, Button } from '@mui/material';
 import { useState } from 'react';
+import { TextField, Typography, Box, Stack, Button } from '@mui/material';
 import { addImage, deleteImage, getResources } from '../../services/images';
 
 
-const FormPage = ({ isDeleteImage, setRoute, setData }) => {
+export const FormPage = ({ isDeleteImage, setRoute, setData }) => {
     const [nombreImagen, setNombreImagen] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [nombre, setNombre] = useState('')
@@ -100,7 +100,3 @@ const FormPage = ({ isDeleteImage, setRoute, setData }) => {
         </div>
     );
 }
-
-
-
-export default FormPage;
