@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { TextField, Stack, Box, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { getResourcesByDropDown } from '../../services/images';
-import { ImagesGrid, PaginationRounded, DropDown, ModalView } from '../components'
+import { getResourcesByDropDown, getResources } from '../../services/images';
+import { ImagesGrid, PaginationRounded, DropDown, ModalView, NotFound } from '../components'
 
 
 export const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
@@ -30,10 +30,22 @@ export const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
     const onInputChange = async ({ target }) => {
         const imageInputValue = target.value
         setinputImageText(imageInputValue)
-        if (dropDownValue === "Nombre") setDropDownValue("nombreImagen")
-        const { data } = await getResourcesByDropDown(dropDownValue, imageInputValue)
-        if (data) {
-            const newData = [...data.resources]
+        if (imageInputValue.length > 0) {
+            if (dropDownValue === "Nombre") setDropDownValue("nombreImagen")
+            const response = await getResourcesByDropDown(dropDownValue, imageInputValue)
+            handleServiceResponse(response)
+        }
+        if (imageInputValue.length < 1) {
+            const response = await getResources()
+            handleServiceResponse(response)
+        }
+    }
+
+    const handleServiceResponse = (res) => {
+        if (res.data.total === 0)
+            setData([])
+        else if (res?.data?.resources) {
+            const newData = [...res.data.resources]
             setData(newData)
         }
     }
@@ -70,15 +82,16 @@ export const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
                     />
                 </Stack>
                 <Stack direction="row" >
-                    <ImagesGrid itemData={data} />
-                </Stack>
+                    { data.length > 0 ? <ImagesGrid itemData={data} /> : <NotFound/>}
+                     </Stack>
                 <Stack direction="row" m={5} spacing={4} justifyContent={"center"}>
                     <PaginationRounded setPaginationValue={setPaginationValue}
+                        paginationValue={paginationValue} 
                         dropDownPaginationValue={dropDownPaginationValue}
                         setData={setData} setinputImageText={setinputImageText}
                     />
                     <DropDown width={75} height={50} arr={imageLimitValuesArr}
-                        paginationValue={paginationValue}
+                        paginationValue={paginationValue} 
                         setdropDownPaginationValue={setdropDownPaginationValue}
                         setData={setData} setinputImageText={setinputImageText}
                     />

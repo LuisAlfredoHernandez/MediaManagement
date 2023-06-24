@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { TextField, Typography, Box, Stack, Button } from '@mui/material';
-import { addImage, deleteImage, getResources } from '../../services/images';
+import { addImage, deleteImage } from '../../services/images';
 
 
-export const FormPage = ({ isDeleteImage, setRoute, setData }) => {
+export const FormPage = ({ isDeleteImage, setRoute, setData, data }) => {
     const [nombreImagen, setNombreImagen] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [nombre, setNombre] = useState('')
@@ -20,26 +20,38 @@ export const FormPage = ({ isDeleteImage, setRoute, setData }) => {
         setTipo('')
     }
 
-    const makeServiceCall = () => {
+    const identifyActionType = () => {
         if (!isDeleteImage) {
-            if (!descripcion || !nombreImagen || !nombre || !src || !tipo)
-                alert('Hay campos faltantes para continuar con el proceso!')
-            else
-                addImage(descripcion, nombreImagen, nombre, src, tipo)
-        } else {
-            if (!nombreImagen)
-                alert('Hay campos faltantes para continuar con el proceso!')
-            else
-                deleteImage(nombreImagen)
-        }
+            addImageImageFlow()
+        } else
+            deleteImageFlow()
         handleClose()
-        callImagesService();
     }
 
-    const callImagesService = async () => {
-        const { data } = await getResources()
-        const newData = [...data.resources]
-        setData(newData)
+    const addImageImageFlow = async () => {
+        if (!descripcion || !nombreImagen || !nombre || !src || !tipo)
+            alert('Hay campos faltantes para continuar con el proceso!')
+        else {
+            const newResource = await addImage(descripcion, nombreImagen, nombre, src, tipo)
+            if (newResource.data) {
+                alert("El recurso fue agregado exitosamente!")
+                setData([...data, newResource])
+            }
+        }
+    }
+
+    const deleteImageFlow = async () => {
+        if (!nombreImagen)
+            alert('Hay campos faltantes para continuar con el proceso!')
+        else {
+            const response = await deleteImage(nombreImagen)
+            const recursoEliminado = response?.data?.recursoEliminado;
+            if (recursoEliminado) {
+                alert('El recurso fue eliminado exitosamente!')
+                let newData = data.filter(val => val._id != recursoEliminado._id)
+                setData([...newData])
+            }
+        }
     }
 
     const onChangeInputhandler = ({ target }) => {
@@ -89,12 +101,11 @@ export const FormPage = ({ isDeleteImage, setRoute, setData }) => {
                     {!isDeleteImage && <TextField id="url" label="URL"
                         variant="standard" onChange={onChangeInputhandler} value={src} />
                     }
-
                 </Stack>
                 <Stack spacing={2} direction="row" justifyContent={"center"} marginTop={3}>
                     <Button variant="contained" color='error' onClick={handleClose}>Cancelar</Button>
-                    {isDeleteImage ? <Button variant="contained" onClick={makeServiceCall}>Eliminar</Button>
-                        : <Button variant="contained" onClick={makeServiceCall}>Agregar</Button>}
+                    {isDeleteImage ? <Button variant="contained" onClick={identifyActionType}>Eliminar</Button>
+                        : <Button variant="contained" onClick={identifyActionType}>Agregar</Button>}
                 </Stack>
             </Box>
         </div>
