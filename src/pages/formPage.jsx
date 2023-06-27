@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { addImage, deleteImage } from '../../services/images';
 
 
-const FormPage = ({ isDeleteImage, setRoute, setData, data }) => {
+export const FormPage = ({ isDeleteImage, setRoute, setData, data }) => {
     const [nombreImagen, setNombreImagen] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [nombre, setNombre] = useState('')
@@ -20,13 +20,6 @@ const FormPage = ({ isDeleteImage, setRoute, setData, data }) => {
         setTipo('')
     }
 
-    const identifyActionType = () => {
-        if (!isDeleteImage) {
-            addImageImageFlow()
-        } else
-            deleteImageFlow()
-        handleClose()
-    }
 
     const addImageImageFlow = async () => {
         if (!descripcion || !nombreImagen || !nombre || !src || !tipo)
@@ -38,6 +31,7 @@ const FormPage = ({ isDeleteImage, setRoute, setData, data }) => {
                 setData([...data, newResource])
             }
         }
+        handleClose()
     }
 
     const deleteImageFlow = async () => {
@@ -48,10 +42,11 @@ const FormPage = ({ isDeleteImage, setRoute, setData, data }) => {
             const recursoEliminado = response?.data?.recursoEliminado;
             if (recursoEliminado) {
                 alert('El recurso fue eliminado exitosamente!')
-                let newData = data.filter(val => val._id != recursoEliminado._id)
-                setData([...newData])
+                const newData = data.filter(val => val._id != recursoEliminado._id)
+                setData(newData)
             }
         }
+        handleClose()
     }
 
     const onChangeInputhandler = ({ target }) => {
@@ -104,14 +99,10 @@ const FormPage = ({ isDeleteImage, setRoute, setData, data }) => {
                 </Stack>
                 <Stack spacing={2} direction="row" justifyContent={"center"} marginTop={3}>
                     <Button variant="contained" color='error' onClick={handleClose}>Cancelar</Button>
-                    {isDeleteImage ? <Button variant="contained" onClick={identifyActionType}>Eliminar</Button>
-                        : <Button variant="contained" onClick={identifyActionType}>Agregar</Button>}
+                    {isDeleteImage ? <Button variant="contained" onClick={deleteImageFlow}>Eliminar</Button>
+                        : <Button variant="contained" onClick={addImageImageFlow}>Agregar</Button>}
                 </Stack>
             </Box>
         </div>
     );
 }
-
-
-
-export default FormPage;

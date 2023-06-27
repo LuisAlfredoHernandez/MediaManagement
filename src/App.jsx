@@ -3,7 +3,7 @@ import './App.css'
 import { useEffect } from 'react'
 import Homepage from './pages/homePage';
 import { getResources } from '../services/images';
-import FormPage from './pages/formPage';
+import { FormPage } from './pages/formPage';
 
 
 function App() {
