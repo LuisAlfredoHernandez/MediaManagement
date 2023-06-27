@@ -1,15 +1,11 @@
-import ImagesGrid from '../components/imagesGrid'
-import PaginationRounded from '../components/pagination'
-import DropDown from '../components/dropDown';
-import ModalView from '../components/modal'
-import { TextField, Stack, Box, Button } from '@mui/material';
 import { useState } from 'react'
-import { getResourcesByDropDown, getResources } from '../../services/images';
+import { TextField, Stack, Box, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import NotFound from '../components/notFound';
+import { getResourcesByDropDown, getResources } from '../../services/images';
+import { ImagesGrid, PaginationRounded, DropDown, ModalView, NotFound } from '../components'
 
 
-const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
+export const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
     const searchImageByArr = ['Nombre', 'Usuario', 'Tipo']
     const imageLimitValuesArr = [10, 20, 50, 100]
     const [open, setOpen] = useState(false);
@@ -45,9 +41,7 @@ const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
         }
     }
 
-
     const handleServiceResponse = (res) => {
-        console.log(res)
         if (res.data.total === 0)
             setData([])
         else if (res?.data?.resources) {
@@ -107,5 +101,3 @@ const Homepage = ({ data, setData, setDeleteImage, setRoute }) => {
         </>
     );
 }
-
-export default Homepage

@@ -1,7 +1,7 @@
-
 import { ImageListItem } from '@mui/material';
 
-const ImageListContainer = ({item}) => {
+
+export const ImageListContainer = ({item}) => {
     return (
         <ImageListItem key={item.img}>
             <img
@@ -16,5 +16,3 @@ const ImageListContainer = ({item}) => {
         </ImageListItem>
     );
 }
-
-export default ImageListContainer;

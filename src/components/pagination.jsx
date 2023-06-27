@@ -1,10 +1,9 @@
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import { Stack, Pagination } from '@mui/material';
 import { getResources } from '../../services/images';
 import { calculatePagination } from '../helpers';
 
 
-const PaginationRounded = ({ setPaginationValue, paginationValue ,dropDownPaginationValue, setData, setinputImageText }) => {
+export const PaginationRounded = ({ setPaginationValue, paginationValue ,dropDownPaginationValue, setData, setinputImageText }) => {
 
     const handleChange = async (event, value) => {
         const pagination = value
@@ -15,13 +14,9 @@ const PaginationRounded = ({ setPaginationValue, paginationValue ,dropDownPagina
         setData(data.resources)
     }
 
-
     return (
         <Stack spacing={2} justifyContent={"center"}>
             <Pagination count={10} page={paginationValue} shape="rounded" onChange={handleChange} />
         </Stack>
     );
 }
-
-
-export default PaginationRounded

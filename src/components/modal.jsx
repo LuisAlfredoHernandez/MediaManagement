@@ -1,9 +1,9 @@
-import { TextField, Modal, Typography, Box, Stack, Button } from '@mui/material';
 import { useState } from 'react';
+import { TextField, Modal, Typography, Box, Stack, Button } from '@mui/material';
 import { addUser, deleteUser } from '../../services/users';
 
 
-const ModalView = ({ open, setOpen, isDeleteUser }) => {
+export const ModalView = ({ open, setOpen, isDeleteUser }) => {
     const [nombre, setNombre] = useState('')
     const [description, setDescripcion] = useState('')
 
@@ -76,7 +76,3 @@ const ModalView = ({ open, setOpen, isDeleteUser }) => {
         </div>
     );
 }
-
-
-
-export default ModalView;

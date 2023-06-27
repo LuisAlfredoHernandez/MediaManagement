@@ -2,7 +2,7 @@ import { Select, MenuItem } from "@mui/material";
 import { getResources, getResourcesByDropDown } from "../../services/images";
 
 
-const DropDown = ({ width, height, arr, setDropDownValue, setdropDownPaginationValue, inputImageText, paginationValue, setData, setinputImageText }) => {
+export const DropDown = ({ width, height, arr, setDropDownValue, setdropDownPaginationValue, inputImageText, paginationValue, setData, setinputImageText }) => {
 
     const handleChange = ({ target }) => {
         const dropDownValue = target.value
@@ -43,5 +43,3 @@ const DropDown = ({ width, height, arr, setDropDownValue, setdropDownPaginationV
         </Select>
     )
 }
-
-export default DropDown;

@@ -2,7 +2,7 @@ import { Stack } from '@mui/material'
 import img1 from '../assets/276.png'
 
 
-const NotFound = () => {
+export const NotFound = () => {
     return (
         <Stack width={'90%'} justifyContent={"center"}>
             <img className='center' src={img1}/>
@@ -10,5 +10,3 @@ const NotFound = () => {
         </Stack>
     );
 }
-
-export default NotFound;

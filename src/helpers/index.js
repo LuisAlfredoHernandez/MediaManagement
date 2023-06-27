@@ -1,4 +1,3 @@
-
 const calculatePagination = (val) => {
     if (val > 1) {
         let val2 = val
